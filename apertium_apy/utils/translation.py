@@ -365,9 +365,8 @@ def translate_html_mark_headings(to_translate, mode_file, unknown_marks=False):
     proc_deformat = Popen(['apertium-deshtml', '-o'], stdin=PIPE, stdout=PIPE)
     deformatted = proc_deformat.communicate(bytes(to_translate, 'utf-8'))[0]
     check_ret_code('Deformatter', proc_deformat)
-
     translated = yield translate_modefile_bytes(deformatted, 'none', mode_file, unknown_marks)
-
+    translated = translated.replace( b'\xe2\x9d\xa1', b'')
     proc_reformat = Popen(['apertium-rehtml-noent'], stdin=PIPE, stdout=PIPE)
     reformatted = proc_reformat.communicate(translated)[0]
     check_ret_code('Reformatter', proc_reformat)
