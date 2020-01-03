@@ -19,7 +19,7 @@ from apertium_apy.handlers.translate import TranslateHandler
 
 
 class TranslateWebpageHandler(TranslateHandler):
-    def url_repl(self, base, attr, quote, aurl)
+    def url_repl(self, base, attr, quote, aurl):
         aurl = urljoin(base.path, aurl)
         a = urlparse(aurl)
         if a.netloc == '':
